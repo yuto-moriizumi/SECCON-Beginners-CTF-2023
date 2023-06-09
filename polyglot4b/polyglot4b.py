@@ -6,7 +6,7 @@ import subprocess
 
 print(
     f"""\033[36m\
- ____       _             _       _     _____    _ _ _
+ ____ 1      _             _       _     _____    _ _ _
 |  _ \ ___ | |_   _  __ _| | ___ | |_  | ____|__| (_) |_ ___  _ __
 | |_) / _ \| | | | |/ _` | |/ _ \| __| |  _| / _` | | __/ _ \| '__|
 |  __/ (_) | | |_| | (_| | | (_) | |_  | |__| (_| | | || (_) | |
@@ -26,6 +26,8 @@ for _ in range(10):
 
 print(f"{'-' * 68}\033[0m")
 
+print("hoge0")
+
 if len(file) >= 50000:
     print("ERROR: File size too large. (len < 50000)")
     sys.exit(0)
@@ -34,6 +36,7 @@ f_id = uuid.uuid4()
 os.makedirs(f"tmp/{f_id}", exist_ok=True)
 with open(f"tmp/{f_id}/{f_id}", mode="wb") as f:
     f.write(file)
+print("hoge")
 try:
     f_type = subprocess.run(
         ["file", "-bkr", f"tmp/{f_id}/{f_id}"], capture_output=True
@@ -42,7 +45,7 @@ except:
     print("ERROR: Failed to execute command.")
 finally:
     shutil.rmtree(f"tmp/{f_id}")
-
+print("hoge2")
 types = {"JPG": False, "PNG": False, "GIF": False, "TXT": False}
 if "JPEG" in f_type:
     types["JPG"] = True
